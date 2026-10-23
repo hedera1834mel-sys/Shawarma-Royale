@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "LASSI WASSI"
+description = "A premium, mobile-first restaurant website for LASSI WASSI, serving signature shawarma, burgers, chicken, rolls, lassi, and combos across Pune. Helps visitors explore the menu, discover outlets, and order through Swiggy or Zomato."
+version = "1.0.0"
+id = "artifacts/lassi-wassi"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23279
+
+[services.development]
+run = "pnpm --filter @workspace/lassi-wassi run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/lassi-wassi", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/lassi-wassi/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23279"
+BASE_PATH = "/"
