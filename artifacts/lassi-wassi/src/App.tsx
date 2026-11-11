@@ -17,6 +17,7 @@ type FoodItem = {
 const categories: Category[] = ['Shawarma', 'Burgers', 'Chicken', 'Rolls', 'Combos', 'Beverages', 'Lassi'];
 
 const photos = {
+  logo: '/images/lassi-wassi-logo.png',
   hero: '/images/hero-shawarma.jpg',
   platter: '/images/food-platter.jpg',
   burger: '/images/chicken-burger.jpg?v=2',
@@ -108,9 +109,12 @@ function App() {
     <div className="site-shell">
       <header className="site-header" data-testid="site-header">
         <div className="nav-inner">
-          <a className="wordmark" href="#home" aria-label="Lassi Wassi home" data-testid="brand-home">
-            <span className="wordmark-main">LASSI WASSI</span>
-            <span className="wordmark-small">PUNE · SINCE 2014</span>
+          <a className="brand-logo-link" href="#home" aria-label="Lassi Wassi home" data-testid="brand-home">
+            <img
+              src={photos.logo}
+              alt="Lassi Wassi - The Original Shawarma - Estd. 2014"
+              className="brand-logo"
+            />
           </a>
           <nav className={`nav-links${mobileOpen ? ' open' : ''}`} aria-label="Main navigation" data-testid="main-navigation">
             {navItems.map(([label, href]) => (
@@ -367,9 +371,12 @@ function App() {
       <footer className="footer" id="contact" data-testid="footer">
         <div className="section-wrap footer-main">
           <div className="footer-brand">
-            <a className="wordmark" href="#home" aria-label="Lassi Wassi home">
-              <span className="wordmark-main">LASSI WASSI</span>
-              <span className="wordmark-small">PUNE · SINCE 2014</span>
+            <a className="brand-logo-link footer-brand-logo" href="#home" aria-label="Lassi Wassi home">
+              <img
+                src={photos.logo}
+                alt="Lassi Wassi - The Original Shawarma - Estd. 2014"
+                className="brand-logo footer-logo-img"
+              />
             </a>
             <p>“When it comes to shawarma, only the best will do.”</p>
             <div className="footer-socials">

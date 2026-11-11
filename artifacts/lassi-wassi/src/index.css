@@ -104,6 +104,10 @@ img { display: block; width: 100%; }
 .wordmark { display: flex; flex-direction: column; align-items: flex-start; line-height: .82; }
 .wordmark-main { font: 900 26px/.88 'Barlow Condensed', sans-serif; letter-spacing: .025em; }
 .wordmark-small { margin-top: 5px; font-size: 8px; font-weight: 800; letter-spacing: .28em; color: #f7c85d; }
+.brand-logo-link { display: inline-flex; align-items: center; text-decoration: none; transition: opacity .2s ease, transform .2s ease; flex-shrink: 0; }
+.brand-logo-link:hover { opacity: .94; transform: scale(1.02); }
+.brand-logo { height: 58px; width: auto; max-width: 100%; object-fit: contain; display: block; }
+.footer-logo-img { height: 64px; }
 .nav-links { display: flex; align-items: center; gap: clamp(17px, 2.4vw, 34px); }
 .nav-links a { position: relative; padding: 9px 0; color: rgba(255,255,255,.86); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .nav-links a::after { content: ''; position: absolute; right: 0; bottom: 3px; left: 0; height: 1px; background: var(--yellow); transform: scaleX(0); transform-origin: left; transition: transform .2s ease; }
@@ -287,6 +291,8 @@ img { display: block; width: 100%; }
   html { scroll-padding-top:70px; }
   .section-wrap { width:calc(100% - 40px); }
   .nav-inner { width:calc(100% - 36px); height:68px; }
+  .brand-logo { height:48px; }
+  .footer-logo-img { height:54px; }
   .wordmark-main { font-size:24px; }
   .menu-toggle { display:grid; }
   .nav-links {
