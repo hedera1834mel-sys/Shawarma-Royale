@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ArrowDown, ArrowRight, ArrowUpRight, BookOpen, ChevronRight, Instagram, MapPin, Menu as MenuIcon, Sparkles, UtensilsCrossed, X } from 'lucide-react';
 import { SiWhatsapp } from 'react-icons/si';
 import logoImg from '../assets/logo.png';
+import VideoSection from '../components/video-section';
 
 const orderUrl = (service: 'swiggy' | 'zomato') =>
   `https://www.${service}.com/search?query=${encodeURIComponent('Lassi Wassi Pune')}`;
@@ -35,10 +36,9 @@ const galleryItems = [
 
 const navItems = [
   ['Home', '/#home'],
-  ['Menu', '/menu'],
   ['About Us', '/#about'],
+  ['Menu', '/menu'],
   ['Our Outlets', '/#outlets'],
-  ['Reviews', '/#reviews'],
   ['Contact', '/#contact'],
 ];
 
@@ -148,7 +148,25 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Streamlined Clean Homepage Menu Showcase (Keeps homepage clean & uncluttered) */}
+        {/* About Us / Story Section (Placed immediately after hero content per requirement) */}
+        <section className="story-section" id="about" aria-labelledby="story-title" data-testid="story-section" data-reveal>
+          <div className="section-wrap story-grid">
+            <div className="story-image">
+              <img src={photos.platter} alt="A generous Lassi Wassi-style shawarma platter with grilled chicken, greens and flatbread" loading="lazy" />
+              <div className="story-stamp">PUNE<br />PROUD<small>EST. 2014</small></div>
+            </div>
+            <div className="story-copy">
+              <span className="eyebrow">A story with spice</span>
+              <h2 id="story-title">Pune made.<br /><span>Pune loved.</span></h2>
+              <blockquote>“Since 2014, we've been serving flavours that keep people coming back.”</blockquote>
+              <p>It started with a simple idea: make the kind of food you tell your friends about. Since 2014, Lassi Wassi has grown alongside the city — serving up generous shawarma, a little comfort and a lot of flavour to the people who make Pune home.</p>
+              <p>Today, we still believe the best meals are the ones that bring you back. Fresh from the grill, full of character, and always better shared.</p>
+              <div className="story-signoff">Your local favourite, always</div>
+            </div>
+          </div>
+        </section>
+
+        {/* Streamlined Clean Homepage Menu Showcase (Placed immediately after About Us per requirement) */}
         <section className="menu-section home-menu-clean" id="menu" aria-labelledby="menu-title" data-testid="menu-section" data-reveal>
           <div className="section-wrap">
             <div className="home-menu-card">
@@ -202,6 +220,9 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* Video Section (Uses official user-uploaded video with muted autoplay, infinite loop & responsive optimization) */}
+        <VideoSection />
 
         {/* Benefits Section */}
         <section className="benefits" aria-label="Why Lassi Wassi" data-reveal>
@@ -270,24 +291,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Story Section */}
-        <section className="story-section" id="about" aria-labelledby="story-title" data-testid="story-section" data-reveal>
-          <div className="section-wrap story-grid">
-            <div className="story-image">
-              <img src={photos.platter} alt="A generous Lassi Wassi-style shawarma platter with grilled chicken, greens and flatbread" loading="lazy" />
-              <div className="story-stamp">PUNE<br />PROUD<small>EST. 2014</small></div>
-            </div>
-            <div className="story-copy">
-              <span className="eyebrow">A story with spice</span>
-              <h2 id="story-title">Pune made.<br /><span>Pune loved.</span></h2>
-              <blockquote>“Since 2014, we've been serving flavours that keep people coming back.”</blockquote>
-              <p>It started with a simple idea: make the kind of food you tell your friends about. Since 2014, Lassi Wassi has grown alongside the city — serving up generous shawarma, a little comfort and a lot of flavour to the people who make Pune home.</p>
-              <p>Today, we still believe the best meals are the ones that bring you back. Fresh from the grill, full of character, and always better shared.</p>
-              <div className="story-signoff">Your local favourite, always</div>
-            </div>
-          </div>
-        </section>
-
         {/* Showcase Section */}
         <section className="showcase" aria-labelledby="showcase-title" data-testid="food-showcase" data-reveal>
           <div className="showcase-image">
@@ -302,40 +305,6 @@ export default function HomePage() {
                 Meet your match <ArrowRight size={15} />
               </a>
             </div>
-          </div>
-        </section>
-
-        {/* Reviews Section */}
-        <section className="reviews-section" id="reviews" aria-labelledby="reviews-title" data-testid="reviews-section" data-reveal>
-          <div className="section-wrap">
-            <div className="reviews-header">
-              <div>
-                <span className="eyebrow">Word on the street</span>
-                <h2 className="section-title" id="reviews-title">Loved by <em>shawarma lovers.</em></h2>
-              </div>
-              <div className="reviews-rating" aria-label="Sample review score, illustrative only">
-                <span className="rating-score">4.8</span>
-                <span><span className="rating-stars" aria-hidden="true">★★★★★</span><span className="rating-caption">Sample rating · Illustrative</span></span>
-              </div>
-            </div>
-            <div className="reviews-grid">
-              <article className="review-card">
-                <span className="review-stars" aria-label="Five stars">★★★★★</span>
-                <blockquote>“The shawarma is so satisfying — proper flavour, great portions, and that garlic sauce is dangerously good.”</blockquote>
-                <div className="review-meta"><strong>Shreya K.</strong><span>Shawarma fan</span></div>
-              </article>
-              <article className="review-card">
-                <span className="review-stars" aria-label="Five stars">★★★★★</span>
-                <blockquote>“Our go-to when the whole group is hungry. There is always something everyone wants.”</blockquote>
-                <div className="review-meta"><strong>Rohan M.</strong><span>Regular since college</span></div>
-              </article>
-              <article className="review-card">
-                <span className="review-stars" aria-label="Five stars">★★★★★</span>
-                <blockquote>“The lassi hits just right after something spicy. Quick, filling and always a good call.”</blockquote>
-                <div className="review-meta"><strong>Ananya P.</strong><span>Lassi loyalist</span></div>
-              </article>
-            </div>
-            <p className="review-note">Sample review copy for this website concept; names and comments are illustrative, not verified customer testimonials.</p>
           </div>
         </section>
 
@@ -414,7 +383,6 @@ export default function HomePage() {
             <a href="/menu">Our menu</a>
             <a href="/#about">Our story</a>
             <a href="/#outlets">Find an outlet</a>
-            <a href="/#reviews">Reviews</a>
             <a href="/#contact">Contact</a>
           </div>
           <div className="footer-column">
