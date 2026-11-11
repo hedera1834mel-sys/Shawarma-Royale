@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ArrowDown, ArrowRight, ArrowUpRight, Instagram, MapPin, Menu as MenuIcon, X } from 'lucide-react';
 import { SiWhatsapp } from 'react-icons/si';
+import logoImg from './assets/logo.png';
 
 type Category = 'Shawarma' | 'Burgers' | 'Chicken' | 'Rolls' | 'Combos' | 'Beverages' | 'Lassi';
 
@@ -17,7 +18,7 @@ type FoodItem = {
 const categories: Category[] = ['Shawarma', 'Burgers', 'Chicken', 'Rolls', 'Combos', 'Beverages', 'Lassi'];
 
 const photos = {
-  logo: '/images/lassi-wassi-logo.png',
+  logo: logoImg,
   hero: '/images/hero-shawarma.jpg',
   platter: '/images/food-platter.jpg',
   burger: '/images/chicken-burger.jpg?v=2',
