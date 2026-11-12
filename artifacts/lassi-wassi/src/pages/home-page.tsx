@@ -53,52 +53,17 @@ const menuHighlights = [
 
 export default function HomePage() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const showcaseRef = useRef<HTMLDivElement | null>(null);
-  const showcaseBgRef = useRef<HTMLDivElement | null>(null);
-  const showcaseContentRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     document.title = 'Lassi Wassi | The Original Shawarma Pune';
 
-    // Layered Parallax scrolling ONLY for "The Kind You Think About" showcase section
-    let ticking = false;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const showcase = showcaseRef.current;
-          const bg = showcaseBgRef.current;
-          const content = showcaseContentRef.current;
-
-          // Compute parallax strictly for "The Kind You Think About" section
-          if (showcase && bg) {
-            const rect = showcase.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-              const relativeScroll = window.innerHeight - rect.top;
-              bg.style.transform = `translate3d(0, ${relativeScroll * 0.16}px, 0)`;
-              if (content) {
-                content.style.transform = `translate3d(0, ${relativeScroll * 0.05}px, 0)`;
-              }
-            }
-          }
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    if (!prefersReducedMotion) {
-      window.addEventListener('scroll', onScroll, { passive: true });
-    }
 
     if (
       !('IntersectionObserver' in window) ||
       prefersReducedMotion
     ) {
-      return () => {
-        if (!prefersReducedMotion) window.removeEventListener('scroll', onScroll);
-      };
+      return undefined;
     }
 
     const observer = new IntersectionObserver((entries, activeObserver) => {
@@ -160,21 +125,21 @@ export default function HomePage() {
       </header>
 
       <main>
-        {/* Main Landing Hero: "TASTE THAT PULLS YOU IN" - Completely Static Background (No Parallax), Center-Aligned */}
-        <section className="hero hero-center-aligned" id="home" aria-labelledby="hero-title" data-testid="hero-section">
-          {/* Completely Static Background Layer */}
-          <div className="hero-bg-layer static-bg" aria-hidden="true">
+        {/* Main Landing Hero: "TASTE THAT PULLS YOU IN" - Restored Desktop Layout & Isolated Crisp Mobile Hero */}
+        <section className="hero" id="home" aria-labelledby="hero-title" data-testid="hero-section">
+          {/* Background Layer with Original High-Quality Shawarma */}
+          <div className="hero-bg-layer" aria-hidden="true">
             <img
               src={photos.hero}
               alt="Lassi Wassi Authentic Grilled Chicken Shawarma"
               className="hero-bg-image"
               loading="eager"
             />
-            {/* Dark semi-transparent overlay for text clarity */}
+            {/* Subtle dark gradient overlay preserving full food vibrancy */}
             <div className="hero-overlay" />
           </div>
 
-          {/* Foreground Hero Content Group (Center-Aligned, Positioned Slightly Higher) */}
+          {/* Foreground Hero Content Group */}
           <div className="hero-content">
             <p className="hero-kicker">Pune's neighbourhood favourite · Since 2014</p>
             <h1 id="hero-title">Taste that <span>pulls you in.</span></h1>
@@ -345,29 +310,31 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Showcase Banner: "The Kind You Think About" with Full Shawarma Background & Layered Parallax */}
-        <section className="showcase-banner" id="showcase" ref={showcaseRef} aria-labelledby="showcase-title" data-reveal>
-          {/* Parallax Background Layer */}
-          <div className="showcase-bg-layer" ref={showcaseBgRef} aria-hidden="true">
+        {/* Showcase Banner: "The Kind You Think About" with Stationary Sticky Background & Scrolling Foreground */}
+        <section className="showcase-banner" id="showcase" aria-labelledby="showcase-title" data-reveal>
+          {/* Layer 1: Stationary Sticky Background */}
+          <div className="showcase-sticky-bg" aria-hidden="true">
             <img
               src={photos.hero}
               alt="Close-up of freshly grilled chicken shawarma wrapped with crisp greens and garlic sauce"
               className="showcase-bg-image"
               loading="lazy"
             />
-            {/* Dark overlay (40-45% base, with stronger dark gradient behind text for supreme readability) */}
+            {/* Subtle dark overlay and bottom gradient maintaining text readability without blurring */}
             <div className="showcase-overlay" />
           </div>
 
-          {/* Foreground Text Group positioned in lower-middle portion */}
-          <div className="showcase-content" ref={showcaseContentRef}>
-            <span className="eyebrow">Slow grilled. Fast gone.</span>
-            <h2 id="showcase-title">The kind<br />you <span>think about.</span></h2>
-            <p>That first bite. The smoky edge. The sauce that gets on your fingers. Some cravings just don't wait.</p>
-            <div className="showcase-actions">
-              <a className="button-primary" href="/menu" data-testid="showcase-menu-cta">
-                Meet your match <ArrowRight size={15} />
-              </a>
+          {/* Layer 2: Scrolling Foreground Text */}
+          <div className="showcase-foreground">
+            <div className="showcase-content">
+              <span className="eyebrow">Slow grilled. Fast gone.</span>
+              <h2 id="showcase-title">The kind<br />you <span>think about.</span></h2>
+              <p>That first bite. The smoky edge. The sauce that gets on your fingers. Some cravings just don't wait.</p>
+              <div className="showcase-actions">
+                <a className="button-primary" href="/menu" data-testid="showcase-menu-cta">
+                  Meet your match <ArrowRight size={15} />
+                </a>
+              </div>
             </div>
           </div>
         </section>
