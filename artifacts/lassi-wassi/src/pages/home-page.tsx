@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowDown, ArrowRight, ArrowUpRight, BookOpen, ChevronRight, Instagram, MapPin, Menu as MenuIcon, Sparkles, UtensilsCrossed, X } from 'lucide-react';
-import { SiWhatsapp } from 'react-icons/si';
+import { SiWhatsapp, SiSwiggy, SiZomato } from 'react-icons/si';
 import logoImg from '../assets/logo.png';
 import VideoSection from '../components/video-section';
 
@@ -53,14 +53,47 @@ const menuHighlights = [
 
 export default function HomePage() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const heroBgRef = useRef<HTMLDivElement | null>(null);
+  const heroContentRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     document.title = 'Lassi Wassi | The Original Shawarma Pune';
 
+    // Parallax scrolling effect for hero section
+    let ticking = false;
+    const bg = heroBgRef.current;
+    const content = heroContentRef.current;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          // Apply subtle, high-performance parallax while hero is near viewport
+          if (bg && scrollY < window.innerHeight * 1.4) {
+            bg.style.transform = `translate3d(0, ${scrollY * 0.28}px, 0)`;
+            if (content) {
+              content.style.transform = `translate3d(0, ${scrollY * 0.1}px, 0)`;
+            }
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    if (!prefersReducedMotion) {
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }
+
     if (
       !('IntersectionObserver' in window) ||
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    ) return;
+      prefersReducedMotion
+    ) {
+      return () => {
+        if (!prefersReducedMotion) window.removeEventListener('scroll', onScroll);
+      };
+    }
 
     const observer = new IntersectionObserver((entries, activeObserver) => {
       entries.forEach((entry) => {
@@ -72,7 +105,10 @@ export default function HomePage() {
     }, { rootMargin: '0px 0px -36px 0px', threshold: 0.12 });
 
     document.querySelectorAll('[data-reveal]').forEach((element) => observer.observe(element));
-    return () => observer.disconnect();
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      observer.disconnect();
+    };
   }, []);
 
   const closeMobileMenu = () => setMobileOpen(false);
@@ -119,9 +155,22 @@ export default function HomePage() {
       </header>
 
       <main>
-        {/* Hero Section */}
+        {/* Unified Hero Section with Full Background & Parallax */}
         <section className="hero" id="home" aria-labelledby="hero-title" data-testid="hero-section">
-          <div className="hero-content">
+          {/* Background Image Layer with Parallax Translation */}
+          <div className="hero-bg-layer" ref={heroBgRef} aria-hidden="true">
+            <img
+              src={photos.hero}
+              alt="Lassi Wassi Authentic Grilled Chicken Shawarma"
+              className="hero-bg-image"
+              loading="eager"
+            />
+            {/* Dark semi-transparent overlay (40-45% base, 55-60% gradient toward bottom) */}
+            <div className="hero-overlay" />
+          </div>
+
+          {/* Foreground Hero Content Group (Lower position on mobile) */}
+          <div className="hero-content" ref={heroContentRef}>
             <p className="hero-kicker">Pune's neighbourhood favourite · Since 2014</p>
             <h1 id="hero-title">Taste that <span>pulls you in.</span></h1>
             <p className="hero-copy">Fresh ingredients. Authentic flavours. Shawarma made to satisfy every craving.</p>
@@ -159,7 +208,7 @@ export default function HomePage() {
               <span className="eyebrow">A story with spice</span>
               <h2 id="story-title">Pune made.<br /><span>Pune loved.</span></h2>
               <blockquote>“Since 2014, we've been serving flavours that keep people coming back.”</blockquote>
-              <p>It started with a simple idea: make the kind of food you tell your friends about. Since 2014, Lassi Wassi has grown alongside the city — serving up generous shawarma, a little comfort and a lot of flavour to the people who make Pune home.</p>
+              <p>It started with a simple idea: make the kind of food you tell your friends about. Since 2014, Lassi Wassi has grown alongside the city, serving up generous shawarma, a little comfort and a lot of flavour to the people who make Pune home.</p>
               <p>Today, we still believe the best meals are the ones that bring you back. Fresh from the grill, full of character, and always better shared.</p>
               <div className="story-signoff">Your local favourite, always</div>
             </div>
@@ -174,7 +223,7 @@ export default function HomePage() {
                 <span className="eyebrow">The good stuff · 12 Signature Categories</span>
                 <h2 className="section-title" id="menu-title">Find your <em>favourite.</em></h2>
                 <p className="intro">
-                  A dedicated menu for every kind of craving — slow-grilled authentic shawarmas, gourmet burgers, charcoal tikkas, loaded platters and Pune's favourite thick lassi.
+                  A dedicated menu for every kind of craving, featuring slow-grilled authentic shawarmas, gourmet burgers, charcoal tikkas, loaded platters and Pune's favourite thick lassi.
                 </p>
 
                 <div className="home-menu-highlights-grid">
@@ -374,8 +423,8 @@ export default function HomePage() {
             <div className="footer-socials">
               <a className="social-link" href="https://www.instagram.com/lassiwassiofficial/" target="_blank" rel="noreferrer" aria-label="Lassi Wassi on Instagram"><Instagram size={15} /></a>
               <a className="social-link" href="https://wa.me/?text=Hi%20Lassi%20Wassi%2C%20I%27d%20like%20to%20know%20more" target="_blank" rel="noreferrer" aria-label="Contact Lassi Wassi on WhatsApp"><SiWhatsapp size={15} /></a>
-              <a className="social-link" href={orderUrl('swiggy')} target="_blank" rel="noreferrer" aria-label="Order Lassi Wassi on Swiggy">S</a>
-              <a className="social-link" href={orderUrl('zomato')} target="_blank" rel="noreferrer" aria-label="Order Lassi Wassi on Zomato">Z</a>
+              <a className="social-link" href={orderUrl('swiggy')} target="_blank" rel="noreferrer" aria-label="Order Lassi Wassi on Swiggy" title="Order on Swiggy"><SiSwiggy size={16} /></a>
+              <a className="social-link" href={orderUrl('zomato')} target="_blank" rel="noreferrer" aria-label="Order Lassi Wassi on Zomato" title="Order on Zomato"><SiZomato size={16} /></a>
             </div>
           </div>
           <div className="footer-column">

@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
 import { ArrowLeft, ArrowUpRight, Flame, Leaf, Search, ShoppingBag } from 'lucide-react';
-import { SiWhatsapp } from 'react-icons/si';
+import { SiWhatsapp, SiSwiggy, SiZomato } from 'react-icons/si';
 import { Instagram, MapPin } from 'lucide-react';
 import logoImg from '../assets/logo.png';
 import { MENU_CATEGORIES, type MenuItem } from '../data/menu';
@@ -306,8 +306,9 @@ export default function MenuPage() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Order Lassi Wassi on Swiggy"
+                title="Order on Swiggy"
               >
-                S
+                <SiSwiggy size={16} />
               </a>
               <a
                 className="social-link"
@@ -315,8 +316,9 @@ export default function MenuPage() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Order Lassi Wassi on Zomato"
+                title="Order on Zomato"
               >
-                Z
+                <SiZomato size={16} />
               </a>
             </div>
           </div>
@@ -327,7 +329,7 @@ export default function MenuPage() {
             <a href="/menu">Full Menu</a>
             <a href="/#about">Our Story</a>
             <a href="/#outlets">Outlets</a>
-            <a href="/#reviews">Reviews</a>
+            <a href="/#contact">Contact</a>
           </div>
 
           <div className="footer-column">

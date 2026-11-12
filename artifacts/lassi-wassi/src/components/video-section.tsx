@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowRight, Flame, Volume2, VolumeX, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export default function VideoSection() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
-  const [hasInteracted, setHasInteracted] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -70,30 +68,19 @@ export default function VideoSection() {
     };
   }, []);
 
-  const toggleSound = () => {
-    if (!videoRef.current) return;
-    setHasInteracted(true);
-    const nextMuted = !videoRef.current.muted;
-    videoRef.current.muted = nextMuted;
-    setIsMuted(nextMuted);
-    if (!isPlaying) {
-      videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
-    }
-  };
-
   return (
     <section className="video-spotlight-section" id="video" aria-labelledby="video-spotlight-title" data-reveal>
       <div className="section-wrap video-spotlight-wrap">
         {/* Left Side: Brand Story & Craft Context */}
         <div className="video-spotlight-text">
           <span className="eyebrow">
-            <Flame size={14} className="text-amber-400" /> The Craft In Motion
+            The Craft In Motion
           </span>
           <h2 className="section-title" id="video-spotlight-title">
             Slow grilled. <em>Carved to perfection.</em>
           </h2>
           <p className="video-spotlight-copy">
-            Watch the spit turn, the spices sizzle, and the tender cuts carved fresh for every order. Since 2014, our craft has been about one thing — flavour that doesn't compromise.
+            Watch the spit turn, the spices sizzle, and the tender cuts carved fresh for every order. Since 2014, our craft has been about one thing, flavour that doesn't compromise.
           </p>
 
           <div className="video-feature-list">
@@ -123,16 +110,10 @@ export default function VideoSection() {
           </div>
         </div>
 
-        {/* Right Side: Responsive Video Frame */}
+        {/* Right Side: Responsive Video Frame (Clean, uninterrupted view) */}
         <div className="video-player-container" ref={containerRef}>
           <div className="video-frame-outer">
-            {/* Live Grill Badge */}
-            <div className="video-live-pill" aria-hidden="true">
-              <span className={`live-pulse-dot ${isPlaying ? 'active' : ''}`} />
-              <span>THE ORIGINAL SHAWARMA</span>
-            </div>
-
-            {/* Video Element */}
+            {/* Clean Video Element without badge or audio overlays */}
             <video
               ref={videoRef}
               className="video-element"
@@ -149,18 +130,6 @@ export default function VideoSection() {
               <source src="/video/video.mp4" type="video/mp4" />
               Your browser does not support HTML5 video playback.
             </video>
-
-            {/* Audio Toggle pill */}
-            <button
-              type="button"
-              className="video-sound-toggle"
-              onClick={toggleSound}
-              aria-label={isMuted ? 'Unmute video audio' : 'Mute video audio'}
-              title={isMuted ? 'Click to unmute' : 'Mute'}
-            >
-              {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-              <span>{isMuted ? 'Tap for Sound' : 'Muted'}</span>
-            </button>
           </div>
         </div>
       </div>
