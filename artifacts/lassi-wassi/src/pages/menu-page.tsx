@@ -102,11 +102,11 @@ export default function MenuPage() {
           <div className="menu-hero-badge">
             <span>Estd. 2014 · Pune</span>
             <span className="badge-divider">•</span>
-            <span>12 Signature Categories</span>
+            <span>17 Authentic Categories · 107 Items</span>
           </div>
           <h1 className="menu-hero-title">Our Digital <em>Menu.</em></h1>
           <p className="menu-hero-subtitle">
-            Authentic spit-roasted shawarmas, loaded charcoal platters, gourmet burgers, and rich, creamy Pune lassis made fresh every single day.
+            Authentic spit-roasted shawarmas, loaded charcoal platters, gourmet burgers, thick shakes, traditional and fruit lassis, mojitos and desserts straight from our official Pune menu.
           </p>
 
           {/* Search and Filters Bar */}
@@ -224,7 +224,7 @@ export default function MenuPage() {
                       <h2 id={`heading-${category.id}`} className="category-showcase-title">
                         {category.name}
                       </h2>
-                      <p className="category-showcase-tagline">{category.tagline}</p>
+                      <p className="category-showcase-tagline">{category.description}</p>
                     </div>
                     <div className="cat-header-badge">
                       <span>{category.items.length} Items</span>
@@ -370,33 +370,38 @@ export default function MenuPage() {
 }
 
 function MenuProductCard({ item }: { item: MenuItem }) {
-  const [imgSrc, setImgSrc] = useState(item.image);
-
   return (
-    <article className="food-card" data-testid={`menu-card-${item.id}`}>
-      <div className="food-image">
-        <img
-          src={imgSrc}
-          alt={item.name}
-          loading="lazy"
-          onError={() => {
-            if (imgSrc !== item.fallbackImage) {
-              setImgSrc(item.fallbackImage);
-            }
-          }}
-        />
-        {item.tag && <span className="food-tag">{item.tag}</span>}
-        <span className={`diet-indicator ${item.isVeg ? 'veg' : 'non-veg'}`} title={item.isVeg ? 'Pure Veg' : 'Non-Veg'}>
-          <span className="diet-dot" />
-        </span>
-      </div>
+    <article className={`food-card ${!item.image ? 'food-card-compact' : ''}`} data-testid={`menu-card-${item.id}`}>
+      {item.image ? (
+        <div className="food-image">
+          <img
+            src={item.image}
+            alt={item.name}
+            loading="lazy"
+          />
+          <span className={`diet-indicator ${item.isVeg ? 'veg' : 'non-veg'}`} title={item.isVeg ? 'Pure Veg' : 'Non-Veg'}>
+            <span className="diet-dot" />
+          </span>
+        </div>
+      ) : (
+        <div className="food-card-top-bar">
+          <span className={`diet-indicator ${item.isVeg ? 'veg' : 'non-veg'}`} title={item.isVeg ? 'Pure Veg' : 'Non-Veg'}>
+            <span className="diet-dot" />
+          </span>
+          <span className="food-cat-pill">{item.category}</span>
+        </div>
+      )}
 
       <div className="food-info">
         <div className="food-head">
           <h3>{item.name}</h3>
           <span className="food-price">₹{item.price}</span>
         </div>
-        <p>{item.description}</p>
+        {item.description ? (
+          <p>{item.description}</p>
+        ) : (
+          <p className="food-desc-placeholder">Freshly made authentic preparation.</p>
+        )}
         <a
           className="food-order"
           href={orderUrl('swiggy')}

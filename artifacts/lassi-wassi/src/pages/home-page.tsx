@@ -43,12 +43,12 @@ const navItems = [
 ];
 
 const menuHighlights = [
-  { label: 'Signature Shawarmas', count: 'Classic, Peri Peri & Loaded' },
-  { label: 'Open Platters', count: 'With Khubz, Dips & Fries' },
-  { label: 'Gourmet Burgers', count: 'Grilled & Crispy Patties' },
-  { label: 'Charcoal Grills', count: 'Smoky Tikka & Skewers' },
-  { label: 'Thick Lassis', count: 'Sweet, Mango & Dry Fruit' },
-  { label: 'Loaded Fries & Combos', count: 'Great for Sharing' },
+  { label: 'Signature Shawarmas', count: 'Paneer, Schezwan & Specials' },
+  { label: 'Authentic Thick Lassis', count: 'Secret, Mango & Dry Fruit' },
+  { label: 'Pune Thick Shakes', count: 'Oreo, Belgian Choc & Mango' },
+  { label: 'Gourmet Burgers', count: 'Zinger, Chicken & Veg Classic' },
+  { label: 'Mojitos & Lemonades', count: 'Mint, Lime & Summer Slam' },
+  { label: 'Desserts & Ice Creams', count: 'Death By Chocolate & Brownie' },
 ];
 
 export default function HomePage() {
@@ -190,10 +190,10 @@ export default function HomePage() {
           <div className="section-wrap">
             <div className="home-menu-card">
               <div className="home-menu-content">
-                <span className="eyebrow">The good stuff · 12 Signature Categories</span>
+                <span className="eyebrow">The good stuff · 17 Categories · 107 Items</span>
                 <h2 className="section-title" id="menu-title">Find your <em>favourite.</em></h2>
                 <p className="intro">
-                  A dedicated menu for every kind of craving, featuring slow-grilled authentic shawarmas, gourmet burgers, charcoal tikkas, loaded platters and Pune's favourite thick lassi.
+                  A dedicated menu featuring all 107 authentic dishes from our official menu: slow-grilled shawarmas, gourmet burgers, thick shakes, traditional and fruit lassis, mojitos, and desserts.
                 </p>
 
                 <div className="home-menu-highlights-grid">
@@ -221,7 +221,7 @@ export default function HomePage() {
               <div className="home-menu-visual">
                 <div className="visual-badge">
                   <Sparkles size={16} className="text-amber-400" />
-                  <span>12 Categories · 40+ Items</span>
+                  <span>17 Categories · 107 Items</span>
                 </div>
                 <img
                   src={photos.platter}
