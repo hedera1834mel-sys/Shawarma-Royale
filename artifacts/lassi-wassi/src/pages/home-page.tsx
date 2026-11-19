@@ -11,9 +11,10 @@ const photos = {
   logo: logoImg,
   hero: '/images/hero-shawarma.jpg',
   platter: '/images/food-platter.jpg',
-  burger: '/images/chicken-burger.jpg?v=2',
+  burger: '/images/menu/zinger-burger.jpg',
   chicken: '/images/grilled-chicken.jpg?v=2',
   roll: '/images/hero-shawarma.jpg',
+  benefitsShawarma: '/images/menu/regular-shawarma.jpg',
   fries: '/images/food-platter.jpg',
   drink: '/images/mango-lassi.jpg?v=2',
 };
@@ -31,7 +32,7 @@ const galleryItems = [
   { title: 'Loaded burgers', image: photos.burger, alt: 'Crispy chicken burger with cheese and lettuce' },
   { title: 'Mango lassi', image: photos.drink, alt: 'Cold mango lassi with a saffron and pistachio garnish' },
   { title: 'Shawarma platter', image: photos.platter, alt: 'A generous platter of grilled chicken, flatbread, greens and sauce' },
-  { title: 'Made to share', image: photos.hero, alt: 'Freshly made shawarma wraps ready to share' },
+  { title: 'Made to share', image: photos.benefitsShawarma, alt: 'Freshly made authentic shawarma wraps ready to share' },
 ];
 
 const navItems = [
@@ -249,7 +250,7 @@ export default function HomePage() {
             <div className="benefits-lead">
               <span className="eyebrow">The LW way</span>
               <h2>Why does this shawarma hit different?</h2>
-              <img className="benefits-photo" src={photos.hero} alt="Close-up of a freshly grilled shawarma with juicy chicken and crisp greens" loading="lazy" />
+              <img className="benefits-photo" src={photos.benefitsShawarma} alt="Authentic Lassi Wassi freshly grilled chicken shawarma" loading="lazy" />
             </div>
             <div className="benefits-grid">
               <article className="benefit">
