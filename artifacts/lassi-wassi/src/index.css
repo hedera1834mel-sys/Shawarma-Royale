@@ -1243,7 +1243,7 @@ img { display: block; width: 100%; }
 
 .video-spotlight-wrap {
   display: grid;
-  grid-template-columns: 1fr 440px;
+  grid-template-columns: 1fr 280px;
   gap: clamp(2.5rem, 5vw, 5rem);
   align-items: center;
 }
@@ -1341,8 +1341,8 @@ img { display: block; width: 100%; }
 .video-frame-outer {
   position: relative;
   width: 100%;
-  max-width: 440px;
-  aspect-ratio: 4 / 3;
+  max-width: 240px;
+  aspect-ratio: 9 / 16;
   border-radius: 22px;
   overflow: hidden;
   background: #090606;
@@ -1470,8 +1470,8 @@ img { display: block; width: 100%; }
     justify-content: center;
   }
   .video-frame-outer {
-    max-width: 360px;
-    aspect-ratio: 4 / 3;
+    max-width: 220px;
+    aspect-ratio: 9 / 16;
     border-radius: 18px;
     margin: 0 auto;
   }
@@ -1491,7 +1491,7 @@ img { display: block; width: 100%; }
   .outlet-grid { grid-template-columns:1fr; }
   .outlet-card,.outlet-card + .outlet-card,.outlet-card:nth-child(3),.outlet-card:nth-child(4) { min-height:0; padding:20px 0; border-left:0; }
   .benefits-grid { grid-template-columns:1fr; }
-  .video-frame-outer { max-width: 300px; aspect-ratio: 4 / 3; border-radius: 16px; margin: 0 auto; }
+  .video-frame-outer { max-width: 190px; aspect-ratio: 9 / 16; border-radius: 16px; margin: 0 auto; }
 }
 @media (prefers-reduced-motion: reduce) {
   *,*::before,*::after { scroll-behavior:auto !important; transition-duration:.01ms !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; }
